@@ -32,8 +32,10 @@
         ::-webkit-scrollbar-track { background: #020617; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
 
-        .aspect-video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .aspect-video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1.5rem; }
+        .aspect-video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; border-radius: 1.5rem; }
+        .aspect-video-container iframe, .aspect-video-container .video-placeholder { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1.5rem; 
+        }
 
         input, select, textarea {
             background-color: rgba(255, 255, 255, 0.05) !important;
@@ -44,20 +46,32 @@
             border-color: var(--mirle-accent) !important;
             outline: none;
         }
+        
+        /* LOGO 修正：確保手機不裁切 */
+        .nav-logo-responsive {
+            filter: brightness(0) invert(1);
+            height: 30px;
+            width: auto;
+            max-width: 100%;
+        }
+        @media (min-width: 768px) {
+            .nav-logo-responsive {
+                position: relative;
+                left: -60px; /* 桌面版略微向左偏移以平衡邊界，但不導致裁切 */
+            }
+        }
     </style>
 </head>
 <body class="mirle-dark-bg text-gray-200">
 
-    <!-- Header & Navigation -->
+       <!-- Header & Navigation -->
     <nav class="fixed w-full z-50 bg-[#020617]/90 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <!-- 3. 左上角 LOGO 靠左並預設為白色風格 -->
                 <div class="flex items-center">
                     <img src="https://www.mirle.com.tw/images/logo.svg" 
                          alt="MIRLE Logo" 
-                         class="h-8 md:h-10" 
-                         style="filter: brightness(0) invert(1); height: 30px; width: auto;position: relative; left: -100px;">
+                         class="nav-logo-responsive">
                 </div>
                 
                 <div class="hidden md:flex space-x-8 items-center text-sm font-medium">
@@ -73,42 +87,69 @@
                         </select>
                     </div>
                 </div>
-                <button onclick="toggleModal('downloadModal')" class="btn-mirle px-5 py-2 rounded-full text-sm font-bold" data-t="btn_download">集團型錄下載</button>
+                <!-- 調整點：改為直接連結至 PDF -->
+                <a href="https://www.mirle.com.tw/download/0/M2026/" 
+                   target="_blank" 
+                   class="btn-mirle px-5 py-2 rounded-full text-sm font-bold flex items-center justify-center transition-all" 
+                   data-t="btn_download">集團型錄下載</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+      <!-- Hero Section -->
     <header class="relative pt-40 pb-32 hero-bg overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+            <!-- 頂部標籤修正 -->
             <div class="inline-block px-4 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm mb-8 animate-pulse">
-                SEMICON Taiwan 2026 | <span data-t="hero_location">台北南港展覽館</span>
+                SEMICON Taiwan 2026 | <span data-t="hero_location">台北南港展覽館一館4F</span>
             </div>
+            
             <h1 class="text-4xl md:text-7xl font-black mb-6 leading-tight text-white">
                 <span data-t="hero_title_1">智造未來</span><br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600" data-t="hero_title_2">半導體整廠自動化</span>
             </h1>
+            
             <p class="text-gray-400 max-w-4xl mx-auto mb-12 text-lg md:text-xl" data-t="hero_desc">
-                盟立集團將於 SEMICON Taiwan 2026 重磅展出<br>「智能製造再升級──AI智能自動化應用在半導體」為主軸的創新解決方案，<br>全方位展現在先進封裝自動化、虛實整合平台、智慧維運與AI終端應用的整合應用實力。
+                盟立集團將於SEMICON Taiwan 2026重磅展出<br>「智能製造再升級──AI智能自動化應用在半導體」為主軸的創新解決方案，<br>全方位展現在先進封裝自動化、虛實整合平台、智慧維運與AI終端應用的整合應用實力。
             </p>
             
-            <!-- Countdown -->
-            <div class="flex justify-center gap-6 md:gap-12 mb-16">
-                <div class="text-center">
-                    <span id="days" class="text-5xl font-bold text-white block">--</span>
-                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_days">天數</span>
-                </div>
-                <div class="text-center">
-                    <span id="hours" class="text-5xl font-bold text-white block">--</span>
-                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_hours">時</span>
-                </div>
-                <div class="text-center">
-                    <span id="mins" class="text-5xl font-bold text-white block">--</span>
-                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_mins">分</span>
-                </div>
-                <div class="text-center">
-                    <span id="secs" class="text-5xl font-bold text-blue-500 block">--</span>
-                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_secs">秒</span>
+            <!-- 倒數計時區 (包含下方紅框資訊) -->
+            <div class="inline-block mb-12 bg-white/5 backdrop-blur-md border border-white/10 p-1 rounded-[2.5rem] overflow-hidden shadow-2xl">
+                <div class="px-10 py-8">
+                    <div class="flex justify-center gap-6 md:gap-12 mb-6">
+                        <div class="text-center">
+                            <span id="days" class="text-5xl font-bold text-white block">--</span>
+                            <span class="text-[10px] uppercase text-gray-500 tracking-widest mt-1" data-t="time_days">天數</span>
+                        </div>
+                        <div class="text-center">
+                            <span id="hours" class="text-5xl font-bold text-white block">--</span>
+                            <span class="text-[10px] uppercase text-gray-500 tracking-widest mt-1" data-t="time_hours">時</span>
+                        </div>
+                        <div class="text-center">
+                            <span id="mins" class="text-5xl font-bold text-white block">--</span>
+                            <span class="text-[10px] uppercase text-gray-500 tracking-widest mt-1" data-t="time_mins">分</span>
+                        </div>
+                        <div class="text-center">
+                            <span id="secs" class="text-5xl font-bold text-blue-500 block">--</span>
+                            <span class="text-[10px] uppercase text-gray-500 tracking-widest mt-1" data-t="time_secs">秒</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 下方紅框處新增資訊 (資訊條) -->
+                    <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 pt-6 border-t border-white/10 text-sm font-medium">
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i data-lucide="calendar" class="w-4 h-4 text-blue-400"></i>
+                            <span>2026/09/02 - 09/04</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-blue-400"></i>
+                            <span data-t="hero_location_short">南港展覽館一館4F</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-white bg-blue-600/80 px-3 py-1 rounded-lg">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            <span data-t="hero_booth_no">盟立攤位：N0676</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -124,9 +165,11 @@
         <div class="absolute inset-0 gradient-overlay pointer-events-none"></div>
     </header>
 
-    <!-- 展覽亮點 -->
+
+      <!-- 展覽亮點 -->
     <section id="highlights" class="py-24 max-w-7xl mx-auto px-4 border-t border-white/5">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+        <!-- 2. 標題手機版置中修正 -->
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 text-center md:text-left">
             <div>
                 <h2 class="text-3xl font-bold mb-3 text-white" data-t="highlights_title">2026 年度展覽亮點</h2>
                 <p class="text-gray-500" data-t="highlights_subtitle">現場實機動態演示，親身體驗自動化技術</p>
@@ -138,7 +181,7 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="bg-white/5 p-0 rounded-3xl border border-white/10 card-hover overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" alt="Robot Dog" class="w-full h-48 object-cover">
+                <img src="https://www.mirle.com.tw/upload/news_list_pic/twL_news_26A22_dbwMAARPWB.jpg" alt="Robot Dog" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3 text-white" data-t="h1_title">巡檢機器狗</h3>
                     <p class="text-sm text-gray-400 leading-relaxed mb-6" data-t="h1_desc">具備自主導航與熱顯像感測，適用於無塵室環境監控與異音偵測。</p>
@@ -149,7 +192,7 @@
                 </div>
             </div>
             <div class="bg-white/5 p-0 rounded-3xl border border-white/10 card-hover overflow-hidden">
-                <img src="https://www.mirle.com.tw/upload/news_list_pic/twL_news_26A22_dbwMAARPWB.jpg" alt="AMR" class="w-full h-48 object-cover">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="AMR" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3 text-white" data-t="h2_title">FOPLP AMR</h3>
                     <p class="text-sm text-gray-400 leading-relaxed mb-6" data-t="h2_desc">次世代高精度晶圓搬運機器人，專為先進封裝製程設計的抗震穩定技術。</p>
@@ -165,7 +208,7 @@
                 </div>
             </div>
             <div class="bg-white/5 p-0 rounded-3xl border border-white/10 card-hover overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800" alt="Gearbox" class="w-full h-48 object-cover">
+                <img src="https://www.mirle.com.tw/upload/news_b/twL_news_26A19_SMVaxdRxab.png" alt="Gearbox" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <h3 class="text-xl font-bold mb-3 text-white" data-t="h4_title">盟英減速機</h3>
                     <p class="text-sm text-gray-400 leading-relaxed mb-6" data-t="h4_desc">機器人關鍵零組件，MIT 自研高精度、高壽命運動控制核心。</p>
@@ -174,6 +217,7 @@
             </div>
         </div>
     </section>
+
 
    <!-- 解決方案 (影音穩定方案) -->
     <section id="solutions" class="py-24 bg-slate-900/50">
@@ -326,12 +370,12 @@
         </div>
     </footer>
 
-    <!-- 集團型錄下載 Modal -->
+   <!-- 型錄下載 Modal (保留以供未來其他功能使用，但主按鈕已改為直連) -->
     <div id="downloadModal" class="fixed inset-0 z-[60] hidden">
         <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" onclick="toggleModal('downloadModal')"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900 w-full max-w-md p-10 rounded-[2.5rem] border border-white/10 shadow-3xl">
             <h3 class="text-2xl font-bold mb-3 text-white" data-t="modal_title">下載集團型錄</h3>
-            <p class="text-gray-500 mb-8" data-t="modal_desc">請填寫基本資料，我們將立即發送最新集團型錄至您的信箱。</p>
+            <p class="text-gray-500 mb-8" data-t="modal_desc">請填寫基本資料，我們將立即發送手冊至您的信箱。</p>
             <form onsubmit="handleSubmit(event)" class="space-y-5">
                 <input required type="text" placeholder="您的姓名" data-t-placeholder="p_name" class="w-full px-5 py-4 rounded-2xl">
                 <input required type="email" placeholder="公司電子郵件" data-t-placeholder="p_email" class="w-full px-5 py-4 rounded-2xl">
@@ -342,6 +386,7 @@
             </div>
         </div>
     </div>
+
 
       <script>
         const translations = {
@@ -377,7 +422,7 @@
                 h4_title: "Mirle Gearbox", h4_desc: "Core robotic components, MIT-developed high-precision motion cores.",
                 live_demo: "LIVE: Every Hour", tag_dynamic: "Live Demo", tag_software: "Software Interaction", tag_component: "Core Components",
                 sol_main_title: "Integrated Solutions", tab_foplp: "Adv. Pkg", tab_ai: "AI Mfg", tab_robot: "Robotics",
-                info_title: "Exhibition Info", info_location_name: "Nangang Center Hall 1", info_address: "No. 1, Jingmao 2nd Rd., Taipei", info_time: "2026/09/02 - 09/04", info_booth: "Booth: N0676",
+                info_title: "Exhibition Info", info_location_name: "Nangang Center Hall 1", info_address: "No. 1, Jingmao 2nd Rd., Taipei", info_time: "2026/09/02 - 09/04", info_booth: "Booth: N0676",info_zone: "Visit Mirle Group at Booth:N0676", 
                 promo_title: "On-site Events", promo_desc: "Scan QR Code at our booth to receive exclusive gifts.",
                 inquiry_title: "Business Inquiry", inquiry_desc: "Fill in the form below, and our team will contact you within 24h.",
                 f_name: "Full Name *", f_company: "Company *", f_email: "Corporate Email *", f_phone: "Phone Number", f_message: "Inquiry Details *",
@@ -425,7 +470,7 @@
                     desc: "整合盟英高精密減速機，實現生產線靈活配置與高精度運動控制。", 
                     list: ["重載型 AMR 搬運模組", "視覺導引快速抓取系統", "人機協作安全防護技術"],
                     videoId: "dQw4w9WgXcQ",
-                    thumb: "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=1000"
+                    thumb: "https://www.mirle.com.tw/upload/news_b/twL_news_26A19_SMVaxdRxab.png"
                 }
             },
             en: {
