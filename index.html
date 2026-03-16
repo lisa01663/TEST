@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盟立自動化 - 2026 SEMICON Taiwan 智造未來特輯</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        :root {
+            --mirle-blue: #0056b3;
+            --mirle-deep: #020617;
+            --mirle-accent: #3b82f6;
+        }
+        body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
+        .mirle-dark-bg { background-color: var(--mirle-deep); }
+        
+        .hero-bg { 
+            background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.95)), 
+                              url('https://www.mirle.com.tw/upload/news_b/twL_news_26C05_Ux6CXM7Xjz.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .gradient-overlay { background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 50%); }
+        .card-hover:hover { transform: translateY(-5px); background-color: rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
+        .btn-mirle { background-color: var(--mirle-blue); color: white; transition: all 0.2s; }
+        .btn-mirle:hover { background-color: #004494; filter: brightness(1.1); }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+
+        .aspect-video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .aspect-video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1.5rem; }
+
+        input, select, textarea {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--mirle-accent) !important;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="mirle-dark-bg text-gray-200">
+
+    <!-- Header & Navigation -->
+    <nav class="fixed w-full z-50 bg-[#020617]/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- 3. 左上角 LOGO 靠左並預設為白色風格 -->
+                <div class="flex items-center">
+                    <img src="https://www.mirle.com.tw/images/logo.svg" 
+                         alt="MIRLE Logo" 
+                         class="h-8 md:h-10" 
+                         style="filter: brightness(0) invert(1); height: 30px; width: auto;position: relative; left: -100px;">
+                </div>
+                
+                <div class="hidden md:flex space-x-8 items-center text-sm font-medium">
+                    <a href="#highlights" class="hover:text-blue-400 transition" data-t="nav_highlights">年度亮點</a>
+                    <a href="#solutions" class="hover:text-blue-400 transition" data-t="nav_solutions">解決方案</a>
+                    <a href="#info" class="hover:text-blue-400 transition" data-t="nav_info">展位資訊</a>
+                    <a href="#inquiry" class="hover:text-blue-400 transition" data-t="nav_inquiry">業務諮詢</a>
+                    <div class="flex items-center gap-2 border-l border-white/20 pl-8">
+                        <i data-lucide="globe" class="w-4 h-4 text-blue-400"></i>
+                        <select id="langSelect" onchange="switchLanguage(this.value)" class="bg-transparent text-white focus:outline-none cursor-pointer">
+                            <option value="zh" class="bg-slate-900">繁體中文</option>
+                            <option value="en" class="bg-slate-900">English</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="toggleModal('downloadModal')" class="btn-mirle px-5 py-2 rounded-full text-sm font-bold" data-t="btn_download">集團型錄下載</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-40 pb-32 hero-bg overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+            <div class="inline-block px-4 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-sm mb-8 animate-pulse">
+                SEMICON Taiwan 2026 | <span data-t="hero_location">台北南港展覽館</span>
+            </div>
+            <h1 class="text-4xl md:text-7xl font-black mb-6 leading-tight text-white">
+                <span data-t="hero_title_1">智造未來</span><br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600" data-t="hero_title_2">半導體整廠自動化</span>
+            </h1>
+            <p class="text-gray-400 max-w-4xl mx-auto mb-12 text-lg md:text-xl" data-t="hero_desc">
+                盟立集團將於 SEMICON Taiwan 2026 重磅展出<br>「智能製造再升級──AI智能自動化應用在半導體」為主軸的創新解決方案，<br>全方位展現在先進封裝自動化、虛實整合平台、智慧維運與AI終端應用的整合應用實力。
+            </p>
+            
+            <!-- Countdown -->
+            <div class="flex justify-center gap-6 md:gap-12 mb-16">
+                <div class="text-center">
+                    <span id="days" class="text-5xl font-bold text-white block">--</span>
+                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_days">天數</span>
+                </div>
+                <div class="text-center">
+                    <span id="hours" class="text-5xl font-bold text-white block">--</span>
+                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_hours">時</span>
+                </div>
+                <div class="text-center">
+                    <span id="mins" class="text-5xl font-bold text-white block">--</span>
+                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_mins">分</span>
+                </div>
+                <div class="text-center">
+                    <span id="secs" class="text-5xl font-bold text-blue-500 block">--</span>
+                    <span class="text-xs uppercase text-gray-500 tracking-widest" data-t="time_secs">秒</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=SEMICON+Taiwan+2026+-+MIRLE+Booth&dates=20260902T020000Z/20260904T090000Z&details=Welcome+to+visit+Mirle+Automation+at+Nangang+Exhibition+Center+Hall+1&location=Taipei+Nangang+Exhibition+Center+Hall+1" target="_blank" class="bg-white text-slate-900 px-10 py-4 rounded-xl font-bold hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                    <i data-lucide="calendar-plus" class="w-5 h-5"></i> <span data-t="btn_calendar">加到 Google 日曆</span>
+                </a>
+                <a href="https://www.semicontaiwan.org/" target="_blank" class="border border-white/20 text-white px-10 py-4 rounded-xl font-bold hover:bg-white/5 transition flex items-center justify-center gap-2">
+                    <span data-t="btn_expo">大會觀展預約</span> <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+        <div class="absolute inset-0 gradient-overlay pointer-events-none"></div>
+    </header>
+
+    <!-- 展覽亮點 -->
+    <section id="highlights" class="py-24 max-w-7xl mx-auto px-4 border-t border-white/5">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+            <div>
+                <h2 class="text-3xl font-bold mb-3 text-white" data-t="highlights_title">2026 年度展覽亮點</h2>
+                <p class="text-gray-500" data-t="highlights_subtitle">現場實機動態演示，親身體驗自動化技術</p>
+            </div>
+            <div class="text-blue-400 font-mono text-sm bg-blue-500/10 px-4 py-2 rounded-lg border border-blue-500/20">
+                Booth: N0676, Hall 1
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white/5 p-0 rounded-3xl border border-white/10 card-hover overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" alt="Robot Dog" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3 text-white" data-t="h1_title">巡檢機器狗</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6" data-t="h1_desc">具備自主導航與熱顯像感測，適用於無塵室環境監控與異音偵測。</p>
+                    <div class="flex items-center gap-2 text-orange-500 text-xs font-bold">
+                        <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+                        <span data-t="live_demo">LIVE: 每整點演示</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/5 p-0 rounded-3xl border border-white/10 card-hover overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="AMR" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3 text-white" data-t="h2_title">FOPLP AMR</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6" data-t="h2_desc">次世代高精度晶圓搬運機器人，專為先進封裝製程設計的抗震穩定技術。</p>
+                    <div class="bg-blue-500/20 text-blue-400 text-xs px-3 py-1 rounded-full inline-block font-bold" data-t="tag_dynamic">實機動態展示</div>
+                </div>
+            </div>
+            <div class="bg-white/5 p-0 rounded-3xl border border-white/10 card-hover overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="AI Platform" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3 text-white" data-t="h3_title">AI 維運平台</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6" data-t="h3_desc">透過大數據分析實現預測性維護，有效降低非計畫性停機時間達 40%。</p>
+                    <div class="bg-purple-500/20 text-purple-400 text-xs px-3 py-1 rounded-full inline-block font-bold" data-t="tag_software">軟體互動區</div>
+                </div>
+            </div>
+            <div class="bg-white/5 p-0 rounded-3xl border border-white/10 card-hover overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800" alt="Gearbox" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3 text-white" data-t="h4_title">盟英減速機</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6" data-t="h4_desc">機器人關鍵零組件，MIT 自研高精度、高壽命運動控制核心。</p>
+                    <div class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full inline-block font-bold" data-t="tag_component">核心組件展出</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- 解決方案 (影音穩定方案) -->
+    <section id="solutions" class="py-24 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-white" data-t="sol_main_title">全方位技術解決方案</h2>
+                <div class="flex justify-center gap-4 flex-wrap mt-10">
+                    <button onclick="switchTab('foplp')" class="sol-tab px-8 py-3 rounded-full border border-white/10 hover:border-blue-500 transition font-bold" id="tab-foplp" data-t="tab_foplp">先進封裝</button>
+                    <button onclick="switchTab('ai')" class="sol-tab px-8 py-3 rounded-full border border-white/10 hover:border-blue-500 transition font-bold" id="tab-ai" data-t="tab_ai">AI 智造</button>
+                    <button onclick="switchTab('robot')" class="sol-tab px-8 py-3 rounded-full border border-white/10 hover:border-blue-500 transition font-bold" id="tab-robot" data-t="tab_robot">機器人技術</button>
+                </div>
+            </div>
+            <div class="bg-white/5 rounded-[3rem] p-10 md:p-16 border border-white/5 relative overflow-hidden">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h3 id="sol-title" class="text-3xl font-bold mb-8 text-blue-400">Loading...</h3>
+                        <p id="sol-desc" class="text-gray-400 leading-relaxed mb-10 text-lg">---</p>
+                        <ul id="sol-list" class="space-y-5 text-gray-300"></ul>
+                        
+                        <!-- 備援按鈕：確保嵌入失敗時客戶仍能觀看 -->
+                        <div class="mt-12">
+                            <a id="sol-external-link" href="#" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-blue-400 transition group border-b border-white/20 pb-1">
+                                <span data-t="btn_watch_yt">前往 YouTube 觀看原始影片</span>
+                                <i data-lucide="external-link" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 智能影音卡片容器 -->
+                    <div class="aspect-video-container" id="sol-media-container">
+                        <!-- 預覽圖層：防止嵌入錯誤導致 UI 破裂 -->
+                        <div id="video-placeholder" class="video-placeholder bg-slate-800 flex items-center justify-center cursor-pointer group" onclick="playVideo()">
+                            <img id="sol-thumb" src="" class="w-full h-full object-cover opacity-60 transition duration-500 group-hover:scale-105" alt="Preview">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center shadow-2xl shadow-blue-500/50 group-hover:scale-110 transition duration-300">
+                                    <i data-lucide="play" class="w-10 h-10 text-white fill-current"></i>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-6 text-xs text-white/40 font-mono tracking-widest uppercase">Click to Load Experience</div>
+                        </div>
+                        <!-- 影音圖層：當點擊時才插入 -->
+                        <div id="iframe-container" class="hidden w-full h-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- 參展資訊 (重構排版以符合示意圖) -->
+    <section id="info" class="py-24 max-w-7xl mx-auto px-4">
+        <!-- 上層：資訊與形象圖 -->
+        <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-16 text-white">
+            <div class="md:w-5/12 shrink-0">
+            <div>
+                <h2 class="text-4xl font-bold mb-10 text-white" data-t="info_title">參展資訊</h2>
+                <div class="space-y-8">
+                    <div class="flex gap-6">
+                        <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="map-pin"></i></div>
+                        <div>
+                            <p class="font-bold text-xl text-white" data-t="info_location_name">台北南港展覽館一館4F</p>
+                            <p class="text-gray-500" data-t="info_address">115 台北市南港區經貿二路 1 號</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="calendar"></i></div>
+                        <div>
+                            <p class="font-bold text-xl text-white">2026/09/02 - 09/04</p>
+                            <p class="text-gray-500" data-t="info_time">10:00 AM - 05:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                        <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="info"></i></div>
+                        <div>
+                            <p class="font-bold text-xl text-white" data-t="info_booth">攤位編號：N0676</p>
+                            <p class="text-gray-500" data-t="info_zone">歡迎蒞臨盟立集團攤位參觀！</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+           <div class="flex-1 relative w-full">
+            <div class="absolute -inset-6 bg-blue-500/10 blur-3xl rounded-full"></div>
+                <img src="https://scontent.ftpe8-2.fna.fbcdn.net/v/t39.30808-6/535026988_1320119253453466_2438199654919482408_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=ErJKKvGoNHcQ7kNvwEm6Sjy&_nc_oc=AdmzDfhg4BTc5d9ApHFtKv156sNvo3OwXaPsWx5TdRKb0mns_bHHjxNVA6hZCZniaac&_nc_zt=23&_nc_ht=scontent.ftpe8-2.fna&_nc_gid=8U_UD63gOtsIgDfIJnM9_Q&_nc_ss=8&oh=00_AfweOCbXjZHkVbxvXz-t1tnR4jjhIuj91j0EwoMRQ12WFg&oe=69B98A8C" alt="Exhibition Hall" class="relative z-10 w-full h-auto rounded-[2rem] border border-white/10 shadow-2xl" 
+                 style="aspect-ratio: 16 / 7; object-fit: cover; object-position: center;">
+            
+            </div>
+        </div>
+
+        <!-- 下層：全寬特別活動區塊 (對應紅線標記) -->
+        <div class="mt-20 p-8 md:p-12 bg-blue-600/5 rounded-[3rem] border border-white/5 flex flex-col md:flex-row gap-10 items-center w-full">
+            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=400" alt="Special Gift" class="w-40 h-40 rounded-3xl object-cover shadow-2xl shadow-blue-500/20">
+            <div>
+                <h4 class="font-bold text-blue-400 mb-4 text-2xl" data-t="promo_title">現場特別活動</h4>
+                <p class="text-gray-400 text-lg leading-relaxed" data-t="promo_desc">親臨攤位掃描 QR Code 即可領取限定「智造未來」精美贈品。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 下方新增業務諮詢表單 -->
+    <section id="inquiry" class="py-24 bg-slate-900/30 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white" data-t="inquiry_title">業務諮詢與合作</h2>
+            <p class="text-gray-400 mb-12" data-t="inquiry_desc">填寫下方表單，我們會盡速與您聯繫。</p>
+            
+            <form onsubmit="handleInquirySubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left bg-white/5 p-8 md:p-12 rounded-[2.5rem] border border-white/10">
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_name">您的姓名 *</label>
+                    <input required type="text" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_company">公司名稱 *</label>
+                    <input required type="text" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_email">公司電子郵件 *</label>
+                    <input required type="email" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_phone">聯絡電話</label>
+                    <input type="tel" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
+                </div>
+                <div class="flex flex-col gap-2 md:col-span-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_message">需求內容 / 詢問事項 *</label>
+                    <textarea required rows="4" class="px-5 py-4 rounded-xl focus:border-blue-500 transition"></textarea>
+                </div>
+                <div class="md:col-span-2 mt-4">
+                    <button type="submit" class="w-full btn-mirle py-5 rounded-2xl font-bold text-xl shadow-xl flex items-center justify-center gap-3">
+                        <span data-t="btn_send">立即送出諮詢</span>
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </form>
+            <div id="inquirySuccess" class="hidden mt-6 p-6 bg-blue-500/20 text-blue-400 rounded-2xl border border-blue-500/30" data-t="msg_inquiry_ok">
+                提交成功！我們已收到您的訊息。
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center mb-6">
+                <!-- 8. 最下方 MIRLE 改成放圖片 -->
+                <img src="https://www.mirle.com.tw/images/logo.svg" 
+                     alt="MIRLE Logo Footer" 
+                     class="h-6 opacity-100" 
+                     style="filter: brightness(0) invert(1);">
+            </div>
+            <p class="text-gray-600 text-sm">Copyright © 盟立集團. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 集團型錄下載 Modal -->
+    <div id="downloadModal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" onclick="toggleModal('downloadModal')"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900 w-full max-w-md p-10 rounded-[2.5rem] border border-white/10 shadow-3xl">
+            <h3 class="text-2xl font-bold mb-3 text-white" data-t="modal_title">下載集團型錄</h3>
+            <p class="text-gray-500 mb-8" data-t="modal_desc">請填寫基本資料，我們將立即發送最新集團型錄至您的信箱。</p>
+            <form onsubmit="handleSubmit(event)" class="space-y-5">
+                <input required type="text" placeholder="您的姓名" data-t-placeholder="p_name" class="w-full px-5 py-4 rounded-2xl">
+                <input required type="email" placeholder="公司電子郵件" data-t-placeholder="p_email" class="w-full px-5 py-4 rounded-2xl">
+                <button type="submit" class="w-full btn-mirle py-4 rounded-2xl font-bold text-lg" data-t="btn_submit">確認提交</button>
+            </form>
+            <div id="successMsg" class="hidden mt-6 p-4 bg-blue-500/20 text-blue-400 text-sm rounded-xl text-center border border-blue-500/30" data-t="msg_success">
+                發送成功！
+            </div>
+        </div>
+    </div>
+
+      <script>
+        const translations = {
+            zh: {
+                nav_highlights: "年度亮點", nav_solutions: "解決方案", nav_info: "展位資訊", nav_inquiry: "業務諮詢", btn_download: "型錄下載",
+                hero_location: "台北南港展覽館", hero_title_1: "智造未來：", hero_title_2: "半導體整廠自動化",
+                hero_desc: "探索 CoWoS 與 FOPLP 先進封裝的自動化極限。盟立帶您見證 AI 維運平台與次世代機器人如何重塑生產線。",
+                time_days: "天數", time_hours: "時", time_mins: "分", time_secs: "秒", btn_calendar: "加到 Google 日曆", btn_expo: "大會觀展預約",
+                highlights_title: "2026 年度展覽亮點", highlights_subtitle: "現場實機動態演示，親身體驗自動化技術",
+                h1_title: "巡檢機器狗", h1_desc: "具備自主導航與熱顯像感測，適用於無塵室環境監控與異音偵測。",
+                h2_title: "FOPLP AMR", h2_desc: "次世代高精度晶圓搬運機器人，專為先進封裝製程設計的抗震穩定技術。",
+                h3_title: "AI 維運平台", h3_desc: "透過大數據分析實現預測性維護，有效降低非計畫性停機時間達 40%。",
+                h4_title: "盟英減速機", h4_desc: "機器人關鍵零組件，MIT 自研高精度、高壽命運動控制核心。",
+                live_demo: "LIVE: 每整點演示", tag_dynamic: "實機動態展示", tag_software: "軟體互動區", tag_component: "核心組件展出",
+                sol_main_title: "全方位技術解決方案", tab_foplp: "先進封裝", tab_ai: "AI 智造", tab_robot: "機器人技術",
+                info_title: "參展資訊", info_location_name: "台北南港展覽館一館", info_address: "115 台北市南港區經貿二路 1 號", info_time: "2026/09/02 - 09/04", info_booth: "攤位編號：N0676",
+                promo_title: "現場特別活動", promo_desc: "親臨攤位掃描 QR Code 即可領取限定「智造未來」精美贈品。",
+                inquiry_title: "業務諮詢與合作", inquiry_desc: "填寫下方表單，我們的專家團隊將於 24 小時內與您聯繫。",
+                f_name: "您的姓名 *", f_company: "公司名稱 *", f_email: "公司電子郵件 *", f_phone: "聯絡電話", f_message: "需求內容 / 詢問事項 *",
+                btn_send: "立即送出諮詢", msg_inquiry_ok: "提交成功！我們已收到您的訊息。",
+                modal_title: "下載年度公司集團型錄", modal_desc: "請填寫基本資料，我們將立即發送手冊至您的信箱。",
+                btn_submit: "確認提交", msg_success: "發送成功！", p_name: "您的姓名", p_email: "公司電子郵件"
+            },
+            en: {
+                nav_highlights: "Highlights", nav_solutions: "Solutions", nav_info: "Expo Info", nav_inquiry: "Inquiry", btn_download: "Catalog",
+                hero_location: "Taipei Nangang Exhibition Center", hero_title_1: "Smart Future:", hero_title_2: "Semiconductor Automation",
+                hero_desc: "Experience the limits of automation in CoWoS and FOPLP. See how Mirle's AI platforms and next-gen robots reshape production lines.",
+                time_days: "Days", time_hours: "Hrs", time_mins: "Mins", time_secs: "Secs", btn_calendar: "Add to Calendar", btn_expo: "Register Now",
+                highlights_title: "2026 Exhibition Highlights", highlights_subtitle: "Live demonstrations of cutting-edge automation technologies",
+                h1_title: "Robot Dog", h1_desc: "Autonomous navigation with thermal sensing for cleanroom monitoring.",
+                h2_title: "FOPLP AMR", h2_desc: "Next-gen high-precision wafer handling robot for advanced packaging.",
+                h3_title: "AI O&M Platform", h3_desc: "Predictive maintenance via big data, reducing downtime by 40%.",
+                h4_title: "Mirle Gearbox", h4_desc: "Core robotic components, MIT-developed high-precision motion cores.",
+                live_demo: "LIVE: Every Hour", tag_dynamic: "Live Demo", tag_software: "Software Interaction", tag_component: "Core Components",
+                sol_main_title: "Integrated Solutions", tab_foplp: "Adv. Pkg", tab_ai: "AI Mfg", tab_robot: "Robotics",
+                info_title: "Exhibition Info", info_location_name: "Nangang Center Hall 1", info_address: "No. 1, Jingmao 2nd Rd., Taipei", info_time: "2026/09/02 - 09/04", info_booth: "Booth: N0676",
+                promo_title: "On-site Events", promo_desc: "Scan QR Code at our booth to receive exclusive gifts.",
+                inquiry_title: "Business Inquiry", inquiry_desc: "Fill in the form below, and our team will contact you within 24h.",
+                f_name: "Full Name *", f_company: "Company *", f_email: "Corporate Email *", f_phone: "Phone Number", f_message: "Inquiry Details *",
+                btn_send: "Send Inquiry", msg_inquiry_ok: "Submitted successfully!",
+                modal_title: "Download Catalogue", modal_desc: "Fill in your details to receive our latest solutions handbook.",
+                btn_submit: "Confirm", msg_success: "Success!", p_name: "Your Name", p_email: "Corporate Email"
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const dict = translations[lang];
+            document.querySelectorAll('[data-t]').forEach(el => {
+                const key = el.getAttribute('data-t');
+                if (dict[key]) el.innerText = dict[key];
+            });
+            document.querySelectorAll('[data-t-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-t-placeholder');
+                if (dict[key]) el.placeholder = dict[key];
+            });
+            const activeTab = document.querySelector('.sol-tab.bg-blue-600')?.id?.replace('tab-', '') || 'foplp';
+            switchTab(activeTab);
+        }
+
+        const solutionData = {
+            zh: {
+                foplp: { 
+                    title: "FOPLP / CoWoS 先進封裝自動化", 
+                    desc: "針對大尺寸面板封裝（FOPLP）與晶圓級封裝（CoWoS）提供高潔淨度、高精度的 AMR 搬運與自動倉儲系統。", 
+                    list: ["震動抑制技術 < 0.05G", "Class 1 潔淨室相容性", "晶圓動態定位補償系統"],
+                    videoId: "8XHJGNxyzjc",
+                    thumb: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000"
+                },
+                ai: { 
+                    title: "AI 智慧維運與大數據分析", 
+                    desc: "利用 AI 演算法進行設備健康度預測，將傳統『故障後維修』轉化為『預測性維護』。", 
+                    list: ["即時異常偵測與告警", "數位孿生（Digital Twin）模擬", "能源管理優化建議"],
+                    videoId: "dQw4w9WgXcQ",
+                    thumb: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000"
+                },
+                robot: { 
+                    title: "高效能工業機器人整合", 
+                    desc: "整合盟英高精密減速機，實現生產線靈活配置與高精度運動控制。", 
+                    list: ["重載型 AMR 搬運模組", "視覺導引快速抓取系統", "人機協作安全防護技術"],
+                    videoId: "dQw4w9WgXcQ",
+                    thumb: "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=1000"
+                }
+            },
+            en: {
+                foplp: { title: "FOPLP / CoWoS Adv. Packaging", desc: "Providing high-cleanliness AMR handling and automated storage for FOPLP/CoWoS.", list: ["Vibration control < 0.05G", "Cleanroom Compliance", "Dynamic Alignment"], videoId: "8XHJGNxyzjc", thumb: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" },
+                ai: { title: "AI O&M and Analytics", desc: "Predict equipment health using AI algorithms, moving from reactive to predictive maintenance.", list: ["Real-time Anomaly Detection", "Digital Twin Simulation", "Energy Insights"], videoId: "pXW8i3P82gM", thumb: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000" },
+                robot: { title: "Robotic Integration", desc: "Integrating Mirle Gearboxes for flexible production lines and high-precision motion control.", list: ["Heavy-duty AMR", "Vision-guided Picking", "Collaborative Safety"], videoId: "dQw4w9WgXcQ", thumb: "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=1000" }
+            }
+        };
+
+        function switchTab(id) {
+            document.querySelectorAll('.sol-tab').forEach(btn => btn.classList.remove('bg-blue-600', 'border-blue-600', 'text-white'));
+            document.getElementById('tab-' + id).classList.add('bg-blue-600', 'border-blue-600', 'text-white');
+            
+            const data = solutionData[currentLang][id];
+            
+            // 更新文字內容
+            document.getElementById('sol-title').innerText = data.title;
+            document.getElementById('sol-desc').innerText = data.desc;
+            const listEl = document.getElementById('sol-list');
+            listEl.innerHTML = data.list.map(item => `<li class="flex items-center gap-4 text-sm md:text-base"><i data-lucide="check-circle" class="w-5 h-5 text-blue-500"></i> ${item}</li>`).join('');
+            
+            // 更新縮圖與備援連結
+            document.getElementById('sol-thumb').src = data.thumb;
+            document.getElementById('sol-external-link').href = `https://www.youtube.com/watch?v=${data.videoId}`;
+
+            // 重置影片載入狀態
+            document.getElementById('video-placeholder').classList.remove('hidden');
+            document.getElementById('iframe-container').classList.add('hidden');
+            document.getElementById('iframe-container').innerHTML = '';
+
+            lucide.createIcons();
+        }
+
+        function playVideo() {
+            const activeId = document.querySelector('.sol-tab.bg-blue-600').id.replace('tab-', '');
+            const videoId = solutionData[currentLang][activeId].videoId;
+            const origin = window.location.origin === 'null' ? '*' : window.location.origin;
+            
+            // 改用 youtube-nocookie.com 提升相容性
+            const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&origin=${encodeURIComponent(origin)}&rel=0&modestbranding=1`;
+            
+            document.getElementById('video-placeholder').classList.add('hidden');
+            const container = document.getElementById('iframe-container');
+            container.classList.remove('hidden');
+            container.innerHTML = `<iframe src="${embedUrl}" title="Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="w-full h-full rounded-3xl"></iframe>`;
+        }
+
+        lucide.createIcons();
+        switchTab('foplp');
+
+        const targetDate = new Date("September 2, 2026 10:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            document.getElementById("days").innerText = Math.floor(gap / day);
+            document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
+            document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
+            document.getElementById("secs").innerText = Math.floor((gap % minute) / second);
+        }, 1000);
+
+        function toggleModal(id) { document.getElementById(id).classList.toggle('hidden'); }
+        function handleSubmit(e) { e.preventDefault(); document.getElementById('successMsg').classList.remove('hidden'); setTimeout(() => { toggleModal('downloadModal'); document.getElementById('successMsg').classList.add('hidden'); }, 2000); }
+        function handleInquirySubmit(e) { e.preventDefault(); document.getElementById('inquirySuccess').classList.remove('hidden'); e.target.reset(); setTimeout(() => { document.getElementById('inquirySuccess').classList.add('hidden'); }, 5000); }
+    </script>
+</body>
+</html>
