@@ -6,7 +6,7 @@
     <title>盟立自動化 - 2026 SEMICON Taiwan 智造未來特輯</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
+   <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         :root {
             --mirle-blue: #0056b3;
@@ -37,27 +37,85 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1.5rem; 
         }
 
-        input, select, textarea {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
+        /* --- 廠商 LOGO 區塊優化 --- */
+        .partner-grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
         }
-        input:focus, textarea:focus {
-            border-color: var(--mirle-accent) !important;
-            outline: none;
+
+        .partner-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 180px;
         }
-        
-        /* LOGO 修正：確保手機不裁切 */
+
+        .partner-card {
+            background-color: #f3f4f6;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.25rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .partner-item:hover .partner-card {
+            background-color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px 2px rgba(59, 130, 246, 0.6);
+            border-color: var(--mirle-accent);
+        }
+
+        .partner-logo-img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            filter: none;
+            transition: transform 0.4s ease;
+        }
+
+        .partner-item:hover .partner-logo-img {
+            transform: scale(1.05);
+        }
+
+        .partner-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--mirle-accent);
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: 0.75rem;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .partner-item:hover .partner-name {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .nav-logo-responsive {
             filter: brightness(0) invert(1);
             height: 30px;
             width: auto;
             max-width: 100%;
         }
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             .nav-logo-responsive {
                 position: relative;
-                left: -60px; /* 桌面版略微向左偏移以平衡邊界，但不導致裁切 */
+                left: -60px;
             }
         }
     </style>
@@ -77,8 +135,8 @@
                 <div class="hidden md:flex space-x-8 items-center text-sm font-medium">
                     <a href="#highlights" class="hover:text-blue-400 transition" data-t="nav_highlights">年度亮點</a>
                     <a href="#solutions" class="hover:text-blue-400 transition" data-t="nav_solutions">解決方案</a>
+                    <a href="#partners" class="hover:text-blue-400 transition" data-t="nav_partners">合展廠商</a>
                     <a href="#info" class="hover:text-blue-400 transition" data-t="nav_info">展位資訊</a>
-                    <a href="#inquiry" class="hover:text-blue-400 transition" data-t="nav_inquiry">業務諮詢</a>
                     <div class="flex items-center gap-2 border-l border-white/20 pl-8">
                         <i data-lucide="globe" class="w-4 h-4 text-blue-400"></i>
                         <select id="langSelect" onchange="switchLanguage(this.value)" class="bg-transparent text-white focus:outline-none cursor-pointer">
@@ -87,7 +145,6 @@
                         </select>
                     </div>
                 </div>
-                <!-- 調整點：改為直接連結至 PDF -->
                 <a href="https://www.mirle.com.tw/download/0/M2026/" 
                    target="_blank" 
                    class="btn-mirle px-5 py-2 rounded-full text-sm font-bold flex items-center justify-center transition-all" 
@@ -266,6 +323,53 @@
         </div>
     </section>
 
+
+    <!-- 合展廠商 LOGO 展示牆 (語系切換功能修正) -->
+    <section id="partners" class="py-24 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-16 text-center tracking-widest text-white uppercase" data-t="partners_title">盟立集團夥伴成員</h2>
+            <div class="partner-grid-container">
+                <!-- 項目 1：盟英科技 -->
+                <div class="partner-item">
+                    <div class="partner-card">
+                        <img src="https://www.maindrive.com.tw/images/logo.png" alt="Main Drive" class="partner-logo-img">
+                    </div>
+                    <div class="partner-name" data-t="p1_name">盟英科技</div>
+                </div>
+                <!-- 項目 2：盟立集團 -->
+                <div class="partner-item">
+                    <div class="partner-card">
+                        <img src="https://www.hyetech.com.tw/site/themes/default/cht/images/logo.png" alt="Mirle" class="partner-logo-img">
+                    </div>
+                    <div class="partner-name" data-t="p2_name">鏵友益科技</div>
+                </div>
+                <!-- 項目 3：Tansimo -->
+                <div class="partner-item">
+                    <div class="partner-card">
+                        <img src="https://raw.githubusercontent.com/lisa01663/TEST/refs/heads/main/tansimo-color.png" alt="Tansimo" class="partner-logo-img">
+                    </div>
+                    <div class="partner-name" data-t="p3_name">鞍新盟機器人</div>
+                </div>
+                <!-- 項目 4：元赫科技 -->
+                <div class="partner-item">
+                    <div class="partner-card">
+                        <img src="https://www.origtek.com/img/logos/logo.png" alt="Origtek" class="partner-logo-img">
+                    </div>
+                    <div class="partner-name" data-t="p4_name">元赫科技</div>
+                </div>
+                <!-- 項目 5：新樂飛無人機 -->
+                <div class="partner-item">
+                    <div class="partner-card">
+                        <img src="https://static.104.com.tw/b_profile/cust_picture/7992/130000000167992/logo.jpg?v=20260105135547" alt="7ADrones" class="partner-logo-img">
+                    </div>
+                    <div class="partner-name" data-t="p5_name">新樂飛無人機</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 <!-- 參展資訊 (重構排版以符合示意圖) -->
     <section id="info" class="py-24 max-w-7xl mx-auto px-4">
         <!-- 上層：資訊與形象圖 -->
@@ -316,46 +420,7 @@
         </div>
     </section>
 
-    <!-- 4. 下方新增業務諮詢表單 -->
-    <section id="inquiry" class="py-24 bg-slate-900/30 border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white" data-t="inquiry_title">業務諮詢與合作</h2>
-            <p class="text-gray-400 mb-12" data-t="inquiry_desc">填寫下方表單，我們會盡速與您聯繫。</p>
-            
-            <form onsubmit="handleInquirySubmit(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left bg-white/5 p-8 md:p-12 rounded-[2.5rem] border border-white/10">
-                <div class="flex flex-col gap-2">
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_name">您的姓名 *</label>
-                    <input required type="text" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
-                </div>
-                <div class="flex flex-col gap-2">
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_company">公司名稱 *</label>
-                    <input required type="text" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
-                </div>
-                <div class="flex flex-col gap-2">
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_email">公司電子郵件 *</label>
-                    <input required type="email" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
-                </div>
-                <div class="flex flex-col gap-2">
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_phone">聯絡電話</label>
-                    <input type="tel" class="px-5 py-4 rounded-xl focus:border-blue-500 transition">
-                </div>
-                <div class="flex flex-col gap-2 md:col-span-2">
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" data-t="f_message">需求內容 / 詢問事項 *</label>
-                    <textarea required rows="4" class="px-5 py-4 rounded-xl focus:border-blue-500 transition"></textarea>
-                </div>
-                <div class="md:col-span-2 mt-4">
-                    <button type="submit" class="w-full btn-mirle py-5 rounded-2xl font-bold text-xl shadow-xl flex items-center justify-center gap-3">
-                        <span data-t="btn_send">立即送出諮詢</span>
-                        <i data-lucide="send" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </form>
-            <div id="inquirySuccess" class="hidden mt-6 p-6 bg-blue-500/20 text-blue-400 rounded-2xl border border-blue-500/30" data-t="msg_inquiry_ok">
-                提交成功！我們已收到您的訊息。
-            </div>
-        </div>
-    </section>
-
+   
     <!-- Footer -->
     <footer class="py-12 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 text-center">
@@ -410,10 +475,11 @@
                 modal_title: "下載年度公司集團型錄", modal_desc: "請填寫基本資料，我們將立即發送手冊至您的信箱。",
                 btn_submit: "確認提交", msg_success: "發送成功！", p_name: "您的姓名", p_email: "公司電子郵件"
             },
-            en: {
-                nav_highlights: "Highlights", nav_solutions: "Solutions", nav_info: "Expo Info", nav_inquiry: "Inquiry", btn_download: "Catalog",
-                hero_location: "Taipei Nangang Exhibition Center", hero_title_1: "Smart Future:", hero_title_2: "Semiconductor Automation",
-                hero_desc: "Experience the limits of automation in CoWoS and FOPLP. See how Mirle's AI platforms and next-gen robots reshape production lines.",
+             en: {
+                nav_highlights: "Highlights", nav_solutions: "Solutions", nav_partners: "Partners", nav_info: "Expo Info", btn_download: "Catalog",
+                hero_location: "Taipei Nangang Hall 1, 4F", hero_title_1: "Smart Future", hero_title_2: "Semiconductor Automation",
+                hero_desc: "Mirle Group will showcase innovation solutions themed 'Intelligent Manufacturing Upgrade - AI in Semiconductors' at SEMICON Taiwan 2026.",
+                hero_location_short: "Nangang Hall 1, 4F", hero_booth_no: "Booth No.: N0676",
                 time_days: "Days", time_hours: "Hrs", time_mins: "Mins", time_secs: "Secs", btn_calendar: "Add to Calendar", btn_expo: "Register Now",
                 highlights_title: "2026 Exhibition Highlights", highlights_subtitle: "Live demonstrations of cutting-edge automation technologies",
                 h1_title: "Robot Dog", h1_desc: "Autonomous navigation with thermal sensing for cleanroom monitoring.",
@@ -422,13 +488,12 @@
                 h4_title: "Mirle Gearbox", h4_desc: "Core robotic components, MIT-developed high-precision motion cores.",
                 live_demo: "LIVE: Every Hour", tag_dynamic: "Live Demo", tag_software: "Software Interaction", tag_component: "Core Components",
                 sol_main_title: "Integrated Solutions", tab_foplp: "Adv. Pkg", tab_ai: "AI Mfg", tab_robot: "Robotics",
-                info_title: "Exhibition Info", info_location_name: "Nangang Center Hall 1", info_address: "No. 1, Jingmao 2nd Rd., Taipei", info_time: "2026/09/02 - 09/04", info_booth: "Booth: N0676",info_zone: "Visit Mirle Group at Booth:N0676", 
+                partners_title: "Mirle Group Ecosystem",
+                p1_name: "Main Drive", p2_name: "HYE TECH", p3_name: "Tansimo Robotic", p4_name: "Origtek", p5_name: "7ADrones", p6_name: "STMicroelectronics",
+                p7_name: "Partner G", p8_name: "Partner H", p9_name: "Partner I", p10_name: "Partner J", p11_name: "Partner K", p12_name: "Partner L",
+                info_title: "Exhibition Info", info_location_name: "Taipei Nangang Hall 1, 4F", info_address: "No. 1, Jingmao 2nd Rd., Taipei", info_time: "2026/09/02 - 09/04", info_booth_full: "Booth No.: N0676", info_booth: "Booth No.: N0676",info_zone: "Visit Mirle Group Booth.",
                 promo_title: "On-site Events", promo_desc: "Scan QR Code at our booth to receive exclusive gifts.",
-                inquiry_title: "Business Inquiry", inquiry_desc: "Fill in the form below, and our team will contact you within 24h.",
-                f_name: "Full Name *", f_company: "Company *", f_email: "Corporate Email *", f_phone: "Phone Number", f_message: "Inquiry Details *",
-                btn_send: "Send Inquiry", msg_inquiry_ok: "Submitted successfully!",
-                modal_title: "Download Catalogue", modal_desc: "Fill in your details to receive our latest solutions handbook.",
-                btn_submit: "Confirm", msg_success: "Success!", p_name: "Your Name", p_email: "Corporate Email"
+                btn_watch_yt: "Watch on YouTube"
             }
         };
 
