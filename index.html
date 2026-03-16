@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         :root {
             --mirle-blue: #0056b3;
             --mirle-deep: #020617;
@@ -37,21 +37,14 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 1.5rem; 
         }
 
-        /* --- 廠商 LOGO 區塊優化 --- */
+        /* --- 廠商 LOGO 區塊 --- */
         .partner-grid-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
         }
-
-        .partner-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 180px;
-        }
-
+        .partner-item { display: flex; flex-direction: column; align-items: center; width: 180px; }
         .partner-card {
             background-color: #f3f4f6;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -66,26 +59,19 @@
             position: relative;
             box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);
         }
-
         .partner-item:hover .partner-card {
             background-color: #ffffff;
             transform: translateY(-5px);
             box-shadow: 0 0 20px 2px rgba(59, 130, 246, 0.6);
             border-color: var(--mirle-accent);
         }
-
         .partner-logo-img {
             max-height: 100%;
             max-width: 100%;
             object-fit: contain;
-            filter: none;
             transition: transform 0.4s ease;
         }
-
-        .partner-item:hover .partner-logo-img {
-            transform: scale(1.05);
-        }
-
+        .partner-item:hover .partner-logo-img { transform: scale(1.05); }
         .partner-name {
             font-size: 0.85rem;
             font-weight: 700;
@@ -100,10 +86,56 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .partner-item:hover .partner-name { opacity: 1; transform: translateY(0); }
 
-        .partner-item:hover .partner-name {
-            opacity: 1;
-            transform: translateY(0);
+        /* --- 視覺效果強化：現場特別活動卡片 --- */
+        .event-card {
+            background: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(2, 6, 23, 1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .event-card:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+        }
+        .event-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .gift-shine {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2rem;
+        }
+        .gift-shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-25deg);
+            transition: 0.75s;
+            z-index: 10;
+        }
+        .event-card:hover .gift-shine::before {
+            left: 150%;
+        }
+        /* 標籤樣式：圓角、藍色漸層、支援文字置中定位 */
+        .badge-limited {
+            background: linear-gradient(to right, #3b82f6, #0056b3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
         }
 
         .nav-logo-responsive {
@@ -410,15 +442,49 @@
             </div>
         </div>
 
-        <!-- 下層：全寬特別活動區塊 (對應紅線標記) -->
-        <div class="mt-20 p-8 md:p-12 bg-blue-600/5 rounded-[3rem] border border-white/5 flex flex-col md:flex-row gap-10 items-center w-full">
-            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=400" alt="Special Gift" class="w-40 h-40 rounded-3xl object-cover shadow-2xl shadow-blue-500/20">
-            <div>
-                <h4 class="font-bold text-blue-400 mb-4 text-2xl" data-t="promo_title">現場特別活動</h4>
-                <p class="text-gray-400 text-lg leading-relaxed" data-t="promo_desc">親臨攤位掃描 QR Code 即可領取限定「智造未來」精美贈品。</p>
+        <!-- 展場活動區塊：修正標籤位置至底部置中 -->
+        <div class="event-card group mt-20 p-8 md:p-14 rounded-[2rem] flex flex-col md:flex-row gap-12 items-center w-full text-left shadow-inner">
+            <div class="md:w-1/3 shrink-0 flex flex-col items-center relative">
+                <!-- 贈品圖片區 -->
+                <div class="gift-shine aspect-square bg-slate-900 border border-white/10 shadow-2xl card-hover w-full relative">
+                    <img src="https://raw.githubusercontent.com/lisa01663/TEST/refs/heads/main/Gift1.jpg" alt="Special Gift" class="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-110">
+                    
+                    <!-- 調整點：圓角藍色標籤移動至底部置中位置 -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 w-full px-4 flex justify-center">
+                        <span class="badge-limited text-[20px] text-white font-bold px-5 py-2 rounded-full tracking-widest uppercase border border-white/20 whitespace-nowrap" data-t="tag_limited">盟立品牌旅行盥洗包</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 活動文字 -->
+            <div class="flex-1 relative z-10">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold tracking-widest" data-t="event_date_badge">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    9/02 - 09/04 SEMICON EXCLUSIVE
+                </div>
+                <h4 class="font-bold text-white mb-6 text-3xl md:text-4xl leading-tight" data-t="promo_title">9/02-9/04 展會限定禮</h4>
+                <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-2xl" data-t="promo_desc">
+                    於展會期間參觀盟立展位，完成問卷答題並獲得 80 分以上，即可至服務台兌換限量<span class="text-blue-400 font-bold">「盟立品牌旅行盥洗包」</span>！
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white shrink-0">1</div>
+                        <span class="text-sm text-gray-300 font-medium" data-t="step_1">參觀盟立攤位</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white shrink-0">2</div>
+                        <span class="text-sm text-gray-300 font-medium" data-t="step_2">掃描現場問卷連結</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white shrink-0">3</div>
+                        <span class="text-sm text-gray-300 font-medium" data-t="step_3">完成條件領取好禮</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
 
    
     <!-- Footer -->
