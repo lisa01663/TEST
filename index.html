@@ -210,25 +210,31 @@
                          class="nav-logo-responsive">
                 </div>
                 
-                <div class="hidden md:flex space-x-8 items-center text-sm font-medium">
-                    <a href="#highlights" class="hover:text-blue-400 transition" data-t="nav_highlights">年度亮點</a>
-                    <a href="#solutions" class="hover:text-blue-400 transition" data-t="nav_solutions">解決方案</a>
-                    <a href="#partners" class="hover:text-blue-400 transition" data-t="nav_partners">合展廠商</a>
-                    <a href="#info" class="hover:text-blue-400 transition" data-t="nav_info">展位資訊</a>
-                    <div class="flex items-center gap-2 border-l border-white/20 pl-8">
-                        <i data-lucide="globe" class="w-4 h-4 text-blue-400"></i>
-                        <select id="langSelect" onchange="switchLanguage(this.value)" class="bg-transparent text-white focus:outline-none cursor-pointer">
+                <!-- 右側操作區：手機版依然保持語系與按鈕可見 -->
+                <div class="flex items-center gap-3 md:gap-8">
+                    <!-- 桌面版導覽連結 (手機版隱藏) -->
+                    <div class="hidden md:flex space-x-8 items-center text-sm font-medium">
+                        <a href="#highlights" class="hover:text-blue-400 transition" data-t="nav_highlights">年度亮點</a>
+                        <a href="#solutions" class="hover:text-blue-400 transition" data-t="nav_solutions">解決方案</a>
+                        <a href="#partners" class="hover:text-blue-400 transition" data-t="nav_partners">合展廠商</a>
+                        <a href="#info" class="hover:text-blue-400 transition" data-t="nav_info">展位資訊</a>
+                    </div>
+
+                    <!-- 語系切換器：從隱藏容器移出，改為在所有裝置上顯示 -->
+                    <div class="flex items-center gap-1.5 border-l border-white/20 pl-3 md:pl-8">
+                        <i data-lucide="globe" class="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-400"></i>
+                        <select id="langSelect" onchange="switchLanguage(this.value)" class="bg-transparent text-white text-[11px] md:text-sm focus:outline-none cursor-pointer">
                             <option value="zh" class="bg-slate-900">繁體中文</option>
                             <option value="en" class="bg-slate-900">English</option>
                         </select>
                     </div>
-                </div>
-                <!-- 下載按鈕加上 data-t-href -->
-                <a href="https://www.mirle.com.tw/download/0/M2026/" 
-                   target="_blank" 
-                   data-t-href="catalog_url"
-                   class="btn-mirle px-5 py-2 rounded-full text-sm font-bold flex items-center justify-center transition-all" 
-                   data-t="btn_download">集團型錄下載</a>
+
+                    <!-- 型錄下載按鈕 (手機版微調大小) -->
+                    <a href="https://www.mirle.com.tw/download/0/M2026/" 
+                       target="_blank" 
+                       data-t-href="catalog_url"
+                       class="btn-mirle px-3 md:px-5 py-1.5 md:py-2 rounded-full text-[10px] md:text-sm font-bold flex items-center justify-center transition-all" 
+                       data-t="btn_download">集團型錄下載</a>
             </div>
         </div>
     </nav>
@@ -640,25 +646,25 @@
                 tag_limited: "Limited Quantity", step_1: "Visit Booth", step_2: "Scan Link", step_3: "Get Gift"
             }
         };
-  let currentLang = 'zh';
+        let currentLang = 'zh';
 
         function switchLanguage(lang) {
             currentLang = lang;
             const dict = translations[lang];
             
-            // 更新文字內容
+            // 文字更新
             document.querySelectorAll('[data-t]').forEach(el => {
                 const key = el.getAttribute('data-t');
                 if (dict[key]) el.innerText = dict[key];
             });
 
-            // 更新圖片來源 (LOGO 切換)
+            // 圖片 Src 更新 (LOGO 切換)
             document.querySelectorAll('[data-t-src]').forEach(el => {
                 const key = el.getAttribute('data-t-src');
                 if (dict[key]) el.src = dict[key];
             });
 
-            // 更新連結 (型錄下載連結切換)
+            // 連結 Href 更新 (下載連結切換)
             document.querySelectorAll('[data-t-href]').forEach(el => {
                 const key = el.getAttribute('data-t-href');
                 if (dict[key]) el.href = dict[key];
