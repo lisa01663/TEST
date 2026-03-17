@@ -38,7 +38,7 @@
         }
 
         /* --- 廠商 LOGO 區塊 --- */
-        .partner-grid-container {
+           .partner-grid-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -87,7 +87,6 @@
             text-overflow: ellipsis;
         }
         .partner-item:hover .partner-name { opacity: 1; transform: translateY(0); }
-
         /* --- 視覺效果強化：現場特別活動卡片 --- */
         .event-card {
             background: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(2, 6, 23, 1) 100%);
@@ -150,17 +149,64 @@
                 left: -60px;
             }
         }
+           /* 交通導引卡片 */
+        .traffic-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .traffic-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateX(8px);
+        }
+
+        .nav-logo-responsive {
+            filter: brightness(0) invert(1);
+            height: 30px;
+            width: auto;
+            max-width: 100%;
+        }
+        @media (min-width: 1024px) {
+            .nav-logo-responsive {
+                position: relative;
+                left: -60px;
+            }
+        }
+        /* --- 新增：科技光暈分隔線 --- */
+        .glow-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent 0%, var(--mirle-accent) 50%, transparent 100%);
+            opacity: 0.6;
+            margin: 3rem 0;
+        }
+
+        .nav-logo-responsive {
+            filter: brightness(0) invert(1);
+            height: 30px;
+            width: auto;
+            max-width: 100%;
+        }
+        @media (min-width: 1024px) {
+            .nav-logo-responsive {
+                position: relative;
+                left: -60px;
+            }
+        }
     </style>
 </head>
 <body class="mirle-dark-bg text-gray-200">
 
-       <!-- Header & Navigation -->
+      <!-- Header & Navigation -->
     <nav class="fixed w-full z-50 bg-[#020617]/90 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
+                    <!-- LOGO 加上 data-t-src 以便語系切換 -->
                     <img src="https://www.mirle.com.tw/images/logo.svg" 
                          alt="MIRLE Logo" 
+                         data-t-src="logo_img"
                          class="nav-logo-responsive">
                 </div>
                 
@@ -243,7 +289,7 @@
             </div>
 
             <div class="flex flex-col sm:flex-row justify-center gap-5">
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=SEMICON+Taiwan+2026+-+MIRLE+Booth&dates=20260902T020000Z/20260904T090000Z&details=Welcome+to+visit+Mirle+Automation+at+Nangang+Exhibition+Center+Hall+1&location=Taipei+Nangang+Exhibition+Center+Hall+1" target="_blank" class="bg-white text-slate-900 px-10 py-4 rounded-xl font-bold hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=SEMICON+Taiwan+2026+-+MIRLE+Booth-N0676&dates=20260902T020000Z/20260904T090000Z&details=Welcome+to+visit+Mirle+Group+at+Nangang+Exhibition+Center+Hall+1&location=Taipei+Nangang+Exhibition+Center+Hall+1+Booth#：N0676" target="_blank" class="bg-white text-slate-900 px-10 py-4 rounded-xl font-bold hover:bg-blue-50 transition flex items-center justify-center gap-2">
                     <i data-lucide="calendar-plus" class="w-5 h-5"></i> <span data-t="btn_calendar">加到 Google 日曆</span>
                 </a>
                 <a href="https://www.semicontaiwan.org/" target="_blank" class="border border-white/20 text-white px-10 py-4 rounded-xl font-bold hover:bg-white/5 transition flex items-center justify-center gap-2">
@@ -357,45 +403,28 @@
 
 
     <!-- 合展廠商 LOGO 展示牆 (語系切換功能修正) -->
-    <section id="partners" class="py-24 border-t border-white/5 relative overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30"></div>
-        
+      <section id="partners" class="pt-24 pb-2 border-t border-white/5 relative overflow-hidden text-center">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-16 text-center tracking-widest text-white uppercase" data-t="partners_title">盟立集團合展夥伴</h2>
+            <h2 class="text-3xl font-bold mb-16 tracking-widest text-white uppercase" data-t="partners_title">盟立集團合展夥伴</h2>
             <div class="partner-grid-container">
-                <!-- 項目 1：盟英科技 -->
                 <div class="partner-item">
-                    <div class="partner-card">
-                        <img src="https://www.maindrive.com.tw/images/logo.png" alt="Main Drive" class="partner-logo-img">
-                    </div>
+                    <div class="partner-card"><img src="https://www.maindrive.com.tw/images/logo.png" alt="Main Drive" class="partner-logo-img"></div>
                     <div class="partner-name" data-t="p1_name">盟英科技</div>
                 </div>
-                <!-- 項目 2：盟立集團 -->
                 <div class="partner-item">
-                    <div class="partner-card">
-                        <img src="https://www.hyetech.com.tw/site/themes/default/cht/images/logo.png" alt="Mirle" class="partner-logo-img">
-                    </div>
+                    <div class="partner-card"><img src="https://www.hyetech.com.tw/site/themes/default/cht/images/logo.png" alt="HYE" class="partner-logo-img"></div>
                     <div class="partner-name" data-t="p2_name">鏵友益科技</div>
                 </div>
-                <!-- 項目 3：Tansimo -->
                 <div class="partner-item">
-                    <div class="partner-card">
-                        <img src="https://raw.githubusercontent.com/lisa01663/TEST/refs/heads/main/tansimo-color.png" alt="Tansimo" class="partner-logo-img">
-                    </div>
+                    <div class="partner-card"><img src="https://raw.githubusercontent.com/lisa01663/TEST/refs/heads/main/tansimo-color.png" alt="Tansimo" class="partner-logo-img"></div>
                     <div class="partner-name" data-t="p3_name">鞍新盟機器人</div>
                 </div>
-                <!-- 項目 4：元赫科技 -->
                 <div class="partner-item">
-                    <div class="partner-card">
-                        <img src="https://www.origtek.com/img/logos/logo.png" alt="Origtek" class="partner-logo-img">
-                    </div>
+                    <div class="partner-card"><img src="https://www.origtek.com/img/logos/logo.png" alt="Origtek" class="partner-logo-img"></div>
                     <div class="partner-name" data-t="p4_name">元赫科技</div>
                 </div>
-                <!-- 項目 5：新樂飛無人機 -->
                 <div class="partner-item">
-                    <div class="partner-card">
-                        <img src="https://static.104.com.tw/b_profile/cust_picture/7992/130000000167992/logo.jpg?v=20260105135547" alt="7ADrones" class="partner-logo-img">
-                    </div>
+                    <div class="partner-card"><img src="https://static.104.com.tw/b_profile/cust_picture/7992/130000000167992/logo.jpg?v=20260105135547" alt="7ADrones" class="partner-logo-img"></div>
                     <div class="partner-name" data-t="p5_name">新樂飛無人機</div>
                 </div>
             </div>
@@ -404,11 +433,16 @@
 
 <!-- 參展資訊 (重構排版以符合示意圖) -->
     <section id="info" class="py-24 max-w-7xl mx-auto px-4">
+
+         <!-- 上層：光暈分隔線 (圖一標示處) -->
+        <div class="glow-divider mb-12"></div>
+
+
         <!-- 上層：資訊與形象圖 -->
         <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-16 text-white">
             <div class="md:w-5/12 shrink-0">
             <div>
-                <h2 class="text-4xl font-bold mb-10 text-white" data-t="info_title">參展資訊</h2>
+                <h2 class="text-4xl font-bold mb-10 text-white" data-t="info_boothtitle">盟立參展資訊</h2>
                 <div class="space-y-8">
                     <div class="flex gap-6">
                         <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-xl flex items-center justify-center shrink-0"><i data-lucide="map-pin"></i></div>
@@ -439,6 +473,39 @@
                 <img src="https://scontent.ftpe8-2.fna.fbcdn.net/v/t39.30808-6/535026988_1320119253453466_2438199654919482408_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=ErJKKvGoNHcQ7kNvwEm6Sjy&_nc_oc=AdmzDfhg4BTc5d9ApHFtKv156sNvo3OwXaPsWx5TdRKb0mns_bHHjxNVA6hZCZniaac&_nc_zt=23&_nc_ht=scontent.ftpe8-2.fna&_nc_gid=8U_UD63gOtsIgDfIJnM9_Q&_nc_ss=8&oh=00_AfweOCbXjZHkVbxvXz-t1tnR4jjhIuj91j0EwoMRQ12WFg&oe=69B98A8C" alt="Exhibition Hall" class="relative z-10 w-full h-auto rounded-[2rem] border border-white/10 shadow-2xl" 
                  style="aspect-ratio: 16 / 7; object-fit: cover; object-position: center;">
             
+            </div>
+        </div>
+
+        <!-- 中層：光暈分隔線 (圖二標示處) -->
+        <div class="glow-divider my-20"></div>
+
+
+ <!-- 參展資訊 & 交通指南 -->
+    <section id="info" class="py-5 max-w-7xl mx-auto px-4 border-t border-white/5">
+        <h2 class="text-4xl font-bold mb-16 text-white text-center" data-t="info_title">南港展覽館 展館交通指南</h2>
+
+                <!-- 交通詳情 -->
+        <div class="grid lg:grid-cols-12 gap-10 items-start text-left mb-20">
+            <div class="lg:col-span-5 rounded-[1.5rem] overflow-hidden border border-white/10 h-[300px] shadow-2xl relative group">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.3357559744877!2d121.61553561041396!3d25.05660673728927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab57f02092dd%3A0x87862fa2121f7e46!2z5Y-w5YyX5Y2X5riv5bGV6Ka96aSoMemkqA!5e0!3m2!1szh-TW!2stw!4v1773716785464" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
+                    <div class="flex items-center gap-3"><i data-lucide="train" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_mrt_title">捷運 (MRT)</h5></div>
+                    <p class="text-gray-400 text-sm" data-t="info_mrt_desc">板南線或文湖線至「南港展覽館站」，1 號出口步行 3 分鐘抵達。</p>
+                </div>
+                <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
+                    <div class="flex items-center gap-3"><i data-lucide="navigation" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_HSR_title">高鐵/台鐵 (HSR/Train)</h5></div>
+                    <p class="text-gray-400 text-sm" data-t="info_HSR_desc">至「南港站」後轉乘捷運板南線往南港展覽館方向，僅需一站。</p>
+                </div>
+                <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
+                    <div class="flex items-center gap-3"><i data-lucide="bus" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_bus_title">公車 & 接駁 (Bus)</h5></div>
+                    <p class="text-gray-400 text-sm" data-t="info_bus_desc">多路公車直達，展期大會提供免費接駁車往返各大核心樞紐。</p>
+                </div>
+                <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
+                    <div class="flex items-center gap-3"><i data-lucide="car" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_parking_title">自行開車 (Parking)</h5></div>
+                    <p class="text-gray-400 text-xs" data-t="info_driving_desc">國道1號東湖/內湖交流道下；國道3號新台五路交流道下。展館提供800個停車位。</p>
+                </div>
             </div>
         </div>
 
@@ -486,17 +553,16 @@
     </section>
 
 
-   
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center mb-6">
-                <!-- 8. 最下方 MIRLE 改成放圖片 -->
-                <img src="https://www.mirle.com.tw/images/logo.svg" 
-                     alt="MIRLE Logo Footer" 
-                     class="h-6 opacity-100" 
-                     style="filter: brightness(0) invert(1);">
-            </div>
+      <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center">
+        <div class="flex justify-center mb-6">
+            <!-- 頁尾 LOGO 也加上 data-t-src -->
+            <img src="https://www.mirle.com.tw/images/logo.svg" 
+                 alt="MIRLE Logo Footer" 
+                 data-t-src="logo_img"
+                 class="h-6 opacity-100" 
+                 style="filter: brightness(0) invert(1);">
+        </div>
             <p class="text-gray-600 text-sm">Copyright © 盟立集團. All rights reserved.</p>
         </div>
     </footer>
@@ -523,73 +589,82 @@
         const translations = {
            zh: {
                 nav_highlights: "年度亮點", nav_solutions: "解決方案", nav_partners: "合展廠商", nav_info: "展位資訊", btn_download: "集團型錄下載",
+                logo_img: "https://www.mirle.com.tw/images/logo.svg",
+                catalog_url: "https://www.mirle.com.tw/download/0/M2026/",
                 hero_location: "台北南港展覽館一館4F", hero_title_1: "智造未來", hero_title_2: "半導體整廠自動化",
                 hero_desc: "盟立集團將於SEMICON Taiwan 2026重磅展出「智能製造再升級──AI智能自動化應用在半導體」為主軸的創新解決方案，全方位展現在先進封裝自動化、虛實整合平台、智慧維運與AI終端應用的整合應用實力。",
-                hero_location_short: "南港展覽館一館4F", hero_booth_no: "盟立攤位：N0676",
-                hero_countdown_label: "距展覽盛大開幕還有",
+                hero_location_short: "台北南港展覽館一館4F", hero_booth_no: "盟立攤位：N0676",
                 time_days: "天數", time_hours: "時", time_mins: "分", time_secs: "秒", btn_calendar: "加到 Google 日曆", btn_expo: "大會觀展預約",
-                highlights_title: "2026 年度展覽亮點", highlights_subtitle: "現場實機動態演示，親身體驗自動化技術",
+                highlights_title: "2026 年度展覽亮點", highlights_subtitle: "現場實機動態演示，親身體驗自動化技術", info_booth_short: "攤位編號：N0676, Hall 1",
                 h1_title: "巡檢機器狗", h1_desc: "具備自主導航與熱顯像感測，適用於無塵室環境監控與異音偵測。",
                 h2_title: "FOPLP AMR", h2_desc: "次世代高精度晶圓搬運機器人，專為先進封裝製程設計的抗震穩定技術。",
                 h3_title: "AI 維運平台", h3_desc: "透過大數據分析實現預測性維護，有效降低非計畫性停機時間達 40%。",
                 h4_title: "盟英減速機", h4_desc: "機器人關鍵零組件，MIT 自研高精度、高壽命運動控制核心。",
                 live_demo: "LIVE: 每整點演示", tag_dynamic: "實機動態展示", tag_software: "軟體互動區", tag_component: "核心組件展出",
-                sol_main_title: "全方位技術解決方案", tab_foplp: "先進封裝", tab_ai: "AI 智造", tab_robot: "機器人技術",
-                partners_title: "盟立集團夥伴成員",
-                p1_name: "盟英科技", p2_name: "鏵友益科技", p3_name: "鞍新盟機器人", p4_name: "元赫科技", p5_name: "新樂飛無人機",
-                info_title: "參展資訊", info_location_name: "台北南港展覽館一館4F", info_address: "115 台北市南港區經貿二路 1 號", info_time: "2026/09/02 - 09/04", info_booth_full: "攤位編號：N0676", info_booth: "攤位編號：N0676", info_zone: "歡迎蒞臨盟立集團攤位參觀！",
-                info_traffic_title: "展館交通資訊", info_mrt_title: "捷運 (MRT)", info_mrt_desc: "板南線 南港展覽館站 1 號出口，步行約 3 分鐘即可抵達。",
-                info_bus_title: "公車 & 接駁 (Bus)", info_bus_desc: "多路公車可直達展館門口，展覽期間大會設有免費接駁專車往返各大交通樞紐。",
-                info_parking_title: "自行開車 (Parking)", info_parking_desc: "地下停車場提供 800 個車位，展覽期間出示觀展證件可享有特別停車優惠。",
-                promo_title: "9/02-9/04 展會限定禮", promo_desc: "於展會期間參觀盟立展位，完成問卷答題並獲得 80 分以上，即可至服務台兌換限量「盟立品牌旅行盥洗包」！",
-                tag_limited: "盟立品牌旅行盥洗包", event_date_badge: "9/02 - 09/04 展會限定",
-                step_1: "參觀盟立攤位", step_2: "掃描現場問卷連結", step_3: "完成條件領取好禮",
-                btn_watch_yt: "前往 YouTube 觀看原始影片"
+                sol_main_title: "全方位技術解決方案", tab_foplp: "先進封裝", tab_ai: "AI 智造", tab_robot: "機器人技術", btn_watch_yt: "前往 YouTube 觀看原始影片",
+                partners_title: "盟立集團合展夥伴", p1_name: "盟英科技", p2_name: "鏵友益科技", p3_name: "鞍新盟機器人", p4_name: "元赫科技", p5_name: "新樂飛無人機",
+                info_boothtitle: "盟立參展資訊",info_title: "南港展覽館 展館交通指南", info_location_name: "台北南港展覽館一館4F", info_address: "115 台北市南港區經貿二路 1 號", info_time: "2026/09/02 - 09/04", info_booth: "攤位編號：N0676", info_zone: "歡迎蒞臨盟立集團攤位參觀！",
+                info_map_label: "LOCATION", info_map_name: "台北南港展覽館 1 館",
+                info_mrt_title: "捷運 (MRT)", info_mrt_desc: "板南線或文湖線至「南港展覽館站」，1 號出口步行 3 分鐘抵達一館。",
+                info_HSR_title: "高鐵/台鐵 (HSR/Train)", info_HSR_desc: "至「南港站」後轉乘捷運板南線往南港展覽館方向，僅需一站距離。",
+                info_bus_title: "公車 & 接駁 (Bus)", info_bus_desc: "多路公車直達，展期大會提供免費接駁車往返各大交通樞紐。",
+                info_parking_title: "自行開車 (Parking)", info_driving_desc: "國道1號東湖/內湖交流道下；國道3號新台五路交流道下。展館提供800個停車位。",
+                event_date_badge: "Semicon 展會限定", promo_title: "9/02-9/04 展會限定禮", promo_desc: "於展會期間參觀盟立展位，完成問卷答題並獲得 80 分以上，即可至服務台兌換限量「盟立品牌旅行盥洗包」！",
+                tag_limited: "數量有限，送完為止", step_1: "參觀盟立攤位", step_2: "掃描問卷連結", step_3: "領取限量好禮"
             },
             en: {
                 nav_highlights: "Highlights", nav_solutions: "Solutions", nav_partners: "Partners", nav_info: "Expo Info", btn_download: "Catalog",
+                logo_img: "https://www.mirle.com.tw/en/images/logo.png", 
+                catalog_url: "https://www.mirle.com.tw/download/0/M2026_EN/", // 示意英文版連結
                 hero_location: "Taipei Nangang Hall 1, 4F", hero_title_1: "Smart Future", hero_title_2: "Semiconductor Automation",
                 hero_desc: "Mirle Group will showcase innovation solutions themed 'Intelligent Manufacturing Upgrade - AI in Semiconductors' at SEMICON Taiwan 2026.",
-                hero_location_short: "Nangang Hall 1, 4F", hero_booth_no: "Booth No.: N0676",
-                hero_countdown_label: "Exhibition grand opening in",
+                hero_location_short: "Taipei Nangang Hall 1, 4F", hero_booth_no: "Booth No.: N0676",
                 time_days: "Days", time_hours: "Hrs", time_mins: "Mins", time_secs: "Secs", btn_calendar: "Add to Calendar", btn_expo: "Register Now",
-                highlights_title: "2026 Exhibition Highlights", highlights_subtitle: "Live demonstrations of cutting-edge automation technologies",
+                highlights_title: "2026 Exhibition Highlights", highlights_subtitle: "Live demonstrations of cutting-edge automation technologies", info_booth_short: "Booth: N0676, Hall 1",
                 h1_title: "Robot Dog", h1_desc: "Autonomous navigation with thermal sensing for cleanroom monitoring.",
                 h2_title: "FOPLP AMR", h2_desc: "Next-gen high-precision wafer handling robot for advanced packaging.",
                 h3_title: "AI O&M Platform", h3_desc: "Predictive maintenance via big data, reducing downtime by 40%.",
                 h4_title: "Mirle Gearbox", h4_desc: "Core robotic components, MIT-developed high-precision motion cores.",
-                live_demo: "LIVE: Every Hour", tag_dynamic: "Live Demo", tag_software: "Software Interaction", tag_component: "Core Components",
-                sol_main_title: "Integrated Solutions", tab_foplp: "Adv. Pkg", tab_ai: "AI Mfg", tab_robot: "Robotics",
-                partners_title: "Mirle Group Ecosystem",
-                p1_name: "Main Drive", p2_name: "HYE TECH", p3_name: "Tansimo Robotic", p4_name: "Origtek", p5_name: "7ADrones",
-                info_title: "Exhibition Info", info_location_name: "Taipei Nangang Hall 1, 4F", info_address: "No. 1, Jingmao 2nd Rd., Taipei", info_time: "2026/09/02 - 09/04", info_booth_full: "Booth No.: N0676", info_booth: "Booth No.: N0676", info_zone: "Visit Mirle Group Booth.",
-                info_traffic_title: "Venue Transportation", info_mrt_title: "MRT (Metro)", info_mrt_desc: "Bannan Line, Nangang Exhibition Center Station Exit 1, ~3 min walk.",
-                info_bus_title: "Bus & Shuttle", info_bus_desc: "Multiple bus routes available. Free shuttle buses are available during the event.",
-                info_parking_title: "By Car (Parking)", info_parking_desc: "800 underground spaces available. Special rates for exhibition visitors.",
-                promo_title: "Exhibition Exclusive Gift", promo_desc: "Visit our booth during the exhibition, complete the quiz with 80+ points, and get a limited edition Mirle Travel Bag!",
-                tag_limited: "Mirle Brand Travel Bag", event_date_badge: "Sep 02 - 04 Exclusive",
-                step_1: "Visit Booth", step_2: "Scan Quiz Link", step_3: "Get Gift",
-                btn_watch_yt: "Watch on YouTube"
+                live_demo: "LIVE: Every Hour", tag_dynamic: "Live Demo", tag_software: "Software Area", tag_component: "Core Components",
+                sol_main_title: "Integrated Solutions", tab_foplp: "Adv. Pkg", tab_ai: "AI Mfg", tab_robot: "Robotics", btn_watch_yt: "Watch on YouTube",
+                partners_title: "Mirle Group Ecosystem", p1_name: "Main Drive", p2_name: "HYE TECH", p3_name: "Tansimo Robotic", p4_name: "Origtek", p5_name: "7ADrones",
+                info_boothtitle: "Exhibition Info",info_title: "Nangang Exhibition Guide", info_location_name: "Taipei Nangang Hall 1, 4F", info_address: "No. 1, Jingmao 2nd Rd., Taipei", info_time: "2026/09/02 - 09/04", info_booth: "Booth No.: N0676", info_zone: "Visit Mirle Group Booth.",
+                info_map_label: "LOCATION", info_map_name: "TaiNEX 1",
+                info_mrt_title: "MRT (Metro)", info_mrt_desc: "Take Bannan or Wenhu line to 'Nangang Exhibition Center', Exit 1.",
+                info_HSR_title: "HSR & Train", info_HSR_desc: "To 'Nangang Station' then transfer to MRT Bannan line (1 stop).",
+                info_bus_title: "Bus & Shuttle", info_bus_desc: "Multiple bus routes stop directly at the center. Free shuttles available.",
+                info_parking_title: "Driving & Parking", info_driving_desc: "Exit at Donghu/Neihu (Hwy 1) or Xintai 5th Rd (Hwy 3). 800 spaces.",
+                event_date_badge: "Semicon Exclusive", promo_title: "Exhibition Gift", promo_desc: "Visit our booth, complete the quiz (80+ pts) to get a Mirle Travel Bag!",
+                tag_limited: "Limited Quantity", step_1: "Visit Booth", step_2: "Scan Link", step_3: "Get Gift"
             }
         };
-
-        let currentLang = 'zh';
+  let currentLang = 'zh';
 
         function switchLanguage(lang) {
             currentLang = lang;
             const dict = translations[lang];
+            
+            // 更新文字內容
             document.querySelectorAll('[data-t]').forEach(el => {
                 const key = el.getAttribute('data-t');
                 if (dict[key]) el.innerText = dict[key];
             });
-            document.querySelectorAll('[data-t-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-t-placeholder');
-                if (dict[key]) el.placeholder = dict[key];
+
+            // 更新圖片來源 (LOGO 切換)
+            document.querySelectorAll('[data-t-src]').forEach(el => {
+                const key = el.getAttribute('data-t-src');
+                if (dict[key]) el.src = dict[key];
             });
+
+            // 更新連結 (型錄下載連結切換)
+            document.querySelectorAll('[data-t-href]').forEach(el => {
+                const key = el.getAttribute('data-t-href');
+                if (dict[key]) el.href = dict[key];
+            });
+
             const activeTab = document.querySelector('.sol-tab.bg-blue-600')?.id?.replace('tab-', '') || 'foplp';
             switchTab(activeTab);
         }
-
         const solutionData = {
             zh: {
                 foplp: { 
