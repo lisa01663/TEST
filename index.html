@@ -87,6 +87,19 @@
             text-overflow: ellipsis;
         }
         .partner-item:hover .partner-name { opacity: 1; transform: translateY(0); }
+
+/* --- 強化：科技光暈分隔線 --- */
+        .glow-divider {
+            width: 100%;
+            height: 2px;
+            background-image: linear-gradient(to right, transparent 0%, var(--mirle-accent) 50%, transparent 100%);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); /* 加入發光陰影 */
+            opacity: 0.8; /* 提高不透明度 */
+            margin: 1.5rem 0;
+            display: block;
+        }
+
+
         /* --- 視覺效果強化：現場特別活動卡片 --- */
         .event-card {
             background: linear-gradient(135deg, rgba(10, 22, 40, 0.95) 0%, rgba(2, 6, 23, 1) 100%);
@@ -279,7 +292,7 @@
 </head>
 <body class="mirle-dark-bg text-gray-200">
 
-    <!-- 懸浮社群側欄 (已套用專屬 Hover 顏色) -->
+    <!-- 懸浮社群側欄-->
     <aside class="social-sidebar">
         <a href="https://www.youtube.com/@mirlegroup" target="_blank" class="social-icon-btn hover-youtube" title="YouTube">
             <i data-lucide="youtube" class="w-5 h-5"></i>
@@ -296,7 +309,7 @@
     </aside>
 
 
-       <!-- Header & Navigation (優化手機版擁擠感) -->
+       <!-- Header & Navigation-->
     <nav class="fixed w-full z-50 bg-[#020617]/95 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
             <div class="flex justify-between h-14 md:h-16 items-center">
@@ -342,7 +355,6 @@
                 <i data-lucide="x" class="w-6 h-6"></i>
             </div>
             <div class="bg-white p-4 rounded-2xl flex items-center justify-center mb-6 shadow-2xl overflow-hidden">
-                <!-- 嵌入圖片：WeChat QR Code -->
                 <img src="https://www.mirle.com.tw/upload/data_socialmedia_wechat_qrcode/twL_01ns_web_base_22I05_eCP4Mu9ZEW.png" 
                      onerror="this.src='https://placehold.co/400x400/FFFFFF/000000?text=Scan+QR+Code'"
                      alt="WeChat QR Code" class="w-64 h-64 object-contain">
@@ -424,7 +436,7 @@
 
       <!-- 展覽亮點 -->
     <section id="highlights" class="py-12 max-w-7xl mx-auto px-4 border-t border-white/5">
-        <!-- 2. 標題手機版置中修正 -->
+       
         <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 text-center md:text-left">
             <div>
                 <h2 class="text-3xl font-bold mb-3 text-white" data-t="highlights_title">2026 年度展覽亮點</h2>
@@ -526,7 +538,7 @@
     </section>
 
 
-    <!-- 合展廠商 LOGO 展示牆 (語系切換功能修正) -->
+    <!-- 合展廠商 LOGO 展示牆 -->
       <section id="partners" class="pt-24 pb-2 border-t border-white/5 relative overflow-hidden text-center">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-16 tracking-widest text-white uppercase" data-t="partners_title">盟立集團合展夥伴</h2>
@@ -560,8 +572,6 @@
 
          <!-- 上層：光暈分隔線 (圖一標示處) -->
         <div class="glow-divider mb-12"></div>
-
-
         <!-- 上層：資訊與形象圖 -->
         <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-16 text-white">
             <div class="md:w-5/12 shrink-0">
@@ -616,19 +626,19 @@
             <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="train" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_mrt_title">捷運 (MRT)</h5></div>
-                    <p class="text-gray-400 text-sm" data-t="info_mrt_desc">板南線或文湖線至「南港展覽館站」，1 號出口步行 3 分鐘抵達。</p>
+                    <p class="text-gray-400 text-sm" data-t="info_mrt_desc">搭乘 板南線(藍線) 或 文湖線(棕線) 至「南港展覽館站」，由1號出口出站，步行約3分鐘即可抵達。</p>
                 </div>
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="navigation" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_HSR_title">高鐵/台鐵 (HSR/Train)</h5></div>
-                    <p class="text-gray-400 text-sm" data-t="info_HSR_desc">至「南港站」後轉乘捷運板南線往南港展覽館方向，僅需一站。</p>
+                    <p class="text-gray-400 text-sm" data-t="info_HSR_desc">搭乘至「南港站」後，轉乘捷運板南線 (往南港展覽館方向)，僅需 1 站即可抵達。</p>
                 </div>
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="bus" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_bus_title">公車 & 接駁 (Bus)</h5></div>
-                    <p class="text-gray-400 text-sm" data-t="info_bus_desc">多路公車直達，展期大會提供免費接駁車往返各大核心樞紐。</p>
+                    <p class="text-gray-400 text-sm" data-t="info_bus_desc">多路公車（如 212、605、藍 22 等）直達展覽館門口站牌，展期大會提供免費接駁服務，詳細辦法:(https://www.semicontaiwan.org/zh/shuttlebus)。</p>
                 </div>
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="car" class="text-blue-400"></i><h5 class="font-bold text-white" data-t="info_parking_title">自行開車 (Parking)</h5></div>
-                    <p class="text-gray-400 text-xs" data-t="info_driving_desc">國道1號東湖/內湖交流道下；國道3號新台五路交流道下。展館提供800個停車位。</p>
+                    <p class="text-gray-400 text-xs" data-t="info_driving_desc">國道1號:【北上】由東湖交流道下，接康寧路，過南湖大橋後接三重路，左轉經貿二路<br>【南下】由內湖交流道下，接成功路，過成功橋後接重陽路，直行至展館。<br>國道3號:由新台五路交流道下，接大同路，直行接南港路即可抵達。展館提供800個停車位。</p>
                 </div>
             </div>
         </div>
