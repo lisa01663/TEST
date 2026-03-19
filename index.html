@@ -615,36 +615,33 @@
         <div class="glow-divider my-20"></div>
 
 
-        <!-- 展館交通指南 -->
-        <h3 class="text-3xl font-bold mb-12 text-white" data-t="info_title">南港展覽館 展館交通指南</h3>
+       <!-- 調整：交通指南標題置中 -->
+        <h3 class="text-3xl font-bold mb-12 text-white text-center flex items-center justify-center gap-3" data-t="info_title">
+             南港展覽館 展館交通指南
+        </h3>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start text-left mb-20 px-4 md:px-0">
-            <div class="lg:col-span-5 rounded-[2rem] overflow-hidden border border-white/10 h-[410px] shadow-2xl relative group">
+            <div class="lg:col-span-5 rounded-[2rem] overflow-hidden border border-white/10 h-[400px] shadow-2xl relative group mx-auto w-full">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.3357559744877!2d121.61553561041396!3d25.05660673728927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442ab57f02092dd%3A0x87862fa2121f7e46!2z5Y-w5YyX5Y2X5riv5bGV6Ka96aSoMemkqA!5e0!3m2!1szh-TW!2stw!4v1773716785464" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 <div class="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-4 rounded-xl border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p class="text-xs text-blue-300 font-mono mb-1" data-t="info_map_label">LOCATION</p>
-                    <p class="text-white text-sm font-bold" data-t="info_map_name">台北南港展覽館 1 館</p>
+                    <p class="text-xs text-blue-300 font-mono mb-1 text-center" data-t="info_map_label">LOCATION</p>
+                    <p class="text-white text-sm font-bold text-center" data-t="info_map_name">台北南港展覽館 1 館</p>
                 </div>
             </div>
             
-            <!-- 交通工具明細區塊 (已優化內容排列與連結) -->
             <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- 捷運 -->
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="train" class="w-6 h-6 text-blue-400"></i><h5 class="font-bold text-white text-lg" data-t="info_mrt_title">捷運 (MRT)</h5></div>
                     <p class="text-gray-400 text-sm md:text-base leading-relaxed" data-t="info_mrt_desc">搭乘 板南線(藍線) 或 文湖線(棕線) 至「南港展覽館站」，由1號出口出站，步行約3分鐘即可抵達。</p>
                 </div>
-                <!-- 高鐵/台鐵 -->
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="navigation" class="w-6 h-6 text-blue-400"></i><h5 class="font-bold text-white text-lg" data-t="info_HSR_title">高鐵/台鐵 (HSR/Train)</h5></div>
                     <p class="text-gray-400 text-sm md:text-base leading-relaxed" data-t="info_HSR_desc">搭乘至「南港站」後，轉乘捷運板南線 (往南港展覽館方向)，僅需 1 站即可抵達。</p>
                 </div>
-                <!-- 公車/接駁 -->
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="bus" class="w-6 h-6 text-blue-400"></i><h5 class="font-bold text-white text-lg" data-t="info_bus_title">公車 & 接駁 (Bus)</h5></div>
                     <p class="text-gray-400 text-sm md:text-base leading-relaxed" data-t="info_bus_desc">多路公車（如 212、605、藍 22 等）直達展覽館門口，展期大會提供免費接駁服務，<a href="https://www.semicontaiwan.org/zh/shuttlebus" target="_blank" class="text-blue-400 underline font-bold">詳細辦法</a>。</p>
                 </div>
-                <!-- 自行開車 -->
                 <div class="traffic-card p-6 rounded-2xl border flex flex-col gap-4">
                     <div class="flex items-center gap-3"><i data-lucide="car" class="w-6 h-6 text-blue-400"></i><h5 class="font-bold text-white text-lg" data-t="info_parking_title">自行開車 (Parking)</h5></div>
                     <div class="text-gray-400 text-[10px] md:text-xs leading-relaxed space-y-2" data-t="info_driving_desc">
